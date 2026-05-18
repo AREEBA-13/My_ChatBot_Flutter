@@ -35,7 +35,7 @@ jobs:
 
       # 5. Compile Flutter Web release bundle
       - name: Build Web Application
-        run: flutter build web --release --web-renderer canvaskit
+        run: flutter build web --release
 
       # 6. Push the compiled bundle to the gh-pages branch (free static hosting)
       - name: Deploy to GitHub Pages
