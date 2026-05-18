@@ -9,8 +9,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load environment configurations from local .env
-  await dotenv.load(fileName: ".env");
+  // Load environment configurations from local .env if available
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    debugPrint("Dotenv Notice: No local .env file found. Utilizing compile-time defines.");
+  }
 
   // Initialize Firebase with dynamic options
   try {

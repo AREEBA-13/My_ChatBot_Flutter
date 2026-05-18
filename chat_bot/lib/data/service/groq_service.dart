@@ -9,7 +9,10 @@ class GroqService {
   GroqService({
     String? apiKey,
     this.model = 'llama-3.3-70b-versatile', // High-speed, high-quality llama 3.3 model from Groq
-  }) : apiKey = apiKey ?? dotenv.env['GROQ_API_KEY'] ?? '';
+  }) : apiKey = apiKey ?? 
+                (const String.fromEnvironment('GROQ_API_KEY', defaultValue: '').isNotEmpty
+                    ? const String.fromEnvironment('GROQ_API_KEY')
+                    : (dotenv.env['GROQ_API_KEY'] ?? ''));
 
   /// Fetches a completion from the Groq API using the provided chat history.
   Future<String> getChatResponse(List<Map<String, String>> chatHistory) async {
