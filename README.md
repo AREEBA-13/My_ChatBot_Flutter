@@ -5,27 +5,27 @@
 
 🌟 Features
 
-   🗨️ Predefined Q&A chatbot logic (initial version)
+   🗨️ **State-of-the-art Groq API Integration** (`llama-3.3-70b-versatile`) for intelligent, real-time replies
 
-   🎨 Clean & minimal UI with VelocityX
+   💬 **Full Multi-Turn Context**: Conversational history is preserved and sent dynamically to keep the context intact
 
-   ⏱️ Chat timestamps using intl
+   ⏳ **Dynamic Typing Indicator**: A beautiful bouncing-dots indicator that shows whenever the bot is thinking
 
-   🔄 Smooth animated navigation & transitions
+   ⚡ **Buttery-Smooth Auto-Scrolling**: Implemented using a native reversed `ListView` layout pattern
 
-   📂 Clean coding practices & scalable structure
+   ⌨️ **Smart Keyboard Actions**: Submit questions directly from virtual/physical keyboards
+
+   🎨 **Premium Aesthetic**: Responsive layout styled with VelocityX and custom micro-animations
+
+   ⏱️ **Chat Timestamps** using the `intl` package
 
 🛠️ Tech Stack
 
-   Flutter
-
-   Dart
-
-   VelocityX   (UI toolkit)
-
-   intl   (date & time formatting)
-
-   Cupertino Icons
+   - **Flutter** & **Dart**
+   - **Groq API** (`http` manual integration for production-grade reliability)
+   - **VelocityX** (UI layout engine)
+   - **intl** (Date & time formatting)
+   - **Cupertino Icons**
 
 🔮 Future Improvements
 

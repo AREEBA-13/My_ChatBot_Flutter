@@ -1,10 +1,11 @@
-import 'package:chat_bot/model/message.dart';
+import 'package:chat_bot/core/theme/app_theme.dart';
+import 'package:chat_bot/data/model/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:intl/intl.dart';
 
 class ChatBubble extends StatelessWidget {
-  final Message message;
+  final MessageModel message;
 
   const ChatBubble({super.key, required this.message});
 
@@ -19,29 +20,31 @@ class ChatBubble extends StatelessWidget {
           : MainAxisAlignment.start,
       children: [
         if (!message.isUser)
-          CircleAvatar(
+          const CircleAvatar(
             radius: 20,
             backgroundImage: AssetImage("assets/images/bot_avatar.png"),
           ).pOnly(right: 8),
 
         // Chat bubble + timestamp
-        VStack([
-              message.text.text.white.make(),
-              4.heightBox,
-              timeString.text.xs.gray200.make(),
-            ])
-            .p12()
-            .box
-            .color(
-              message.isUser
-                  ? const Color.fromARGB(255, 20, 32, 139)
-                  : const Color.fromARGB(255, 91, 147, 243),
-            )
-            .rounded
-            .make(),
+        Flexible(
+          child: VStack([
+                message.text.text.white.make(),
+                4.heightBox,
+                timeString.text.xs.gray200.make(),
+              ])
+              .p12()
+              .box
+              .color(
+                message.isUser
+                    ? AppTheme.primaryColor
+                    : AppTheme.secondaryColor,
+              )
+              .rounded
+              .make(),
+        ),
 
         if (message.isUser)
-          CircleAvatar(
+          const CircleAvatar(
             radius: 20,
             backgroundImage: AssetImage("assets/images/user_avatar.png"),
           ).pOnly(left: 8),

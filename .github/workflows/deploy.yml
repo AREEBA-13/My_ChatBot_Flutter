@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Change to 'master' if your default branch is master
+
+permissions:
+  contents: write # Required to allow pushing build output to the gh-pages branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout the source code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Set up the Flutter execution environment
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      # 3. Download Flutter dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+        working-directory: chat_bot
+
+      # 4. Inject the Groq API Key dynamically from GitHub Secrets into the .env asset
+      - name: Create Env File
+        run: |
+          echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > chat_bot/.env
+        shell: bash
+
+      # 5. Compile Flutter Web release bundle
+      - name: Build Web Application
+        run: flutter build web --release --web-renderer canvaskit
+        working-directory: chat_bot
+
+      # 6. Push the compiled bundle to the gh-pages branch (free static hosting)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: chat_bot/build/web
+          branch: gh-pages
